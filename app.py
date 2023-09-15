@@ -1,7 +1,7 @@
 from boggle import Boggle
-from flask import Flask, render_template, jsonify, request, session
+from flask import Flask, render_template, request, session
 from flask_session import Session
-# redirect, flash 
+# redirect, flash
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "chickenzarecool21837"
@@ -29,14 +29,14 @@ def add_word_to_session(word):
     found_words.append(word)
     session['found_words'] = found_words
 
-def check_guess_on_board(user_guess, board, seen):
+# def check_guess_on_board(user_guess, board, seen):
 
-    """ Check if user_guess is on the board """
-    board = get_current_board()
-    seen = {(0,0)}
-    is_valid_word = game.find_from(board, user_guess, seen)
-    print('check_guess_on_board - is_valid_word:', is_valid_word)
-    return is_valid_word
+#     """ Check if user_guess is on the board """
+#     board = get_current_board()
+#     seen = {(0,0)}
+#     is_valid_word = game.find_from(board, user_guess,1, seen)
+#     print('check_guess_on_board - is_valid_word:', is_valid_word)
+#     return is_valid_word
 
 def calculate_high_score(found_words):
 
@@ -48,35 +48,34 @@ def calculate_high_score(found_words):
 
 @app.route('/', methods=['POST', 'GET'])
 def home_page():
-
     """Display the board/ homepage"""
 
     if request.method == 'POST':
         user_guess = request.form.get('guess')
-        print('Recieved user_guess:', user_guess) 
-        
-    # Checking dictionary for valid word """
+        print('Recieved user_guess:', user_guess)
+        # Checking dictionary for valid word """
         if user_guess:
             user_guess = user_guess.strip().upper()
             print('Formatted user_guess:', user_guess)
-            
+
             board = get_current_board()
-            is_valid_word = check_guess_on_board(user_guess, board, set())
+            # is_valid_word = check_guess_on_board(user_guess, board, set())
             print('is_valid_word:', is_valid_word)
 
-            if is_valid_word:
-                add_word_to_session(user_guess)
+        #     if is_valid_word:
+        #         add_word_to_session(user_guess)
 
-                #Calculate high score 
-                found_words = session.get('found_words', [])
-                high_score = calculate_high_score(found_words)
-                session['high_score'] = high_score
-                print('High score:', high_score)
+        #         #Calculate high score
+        #         found_words = session.get('found_words', [])
+        #         high_score = calculate_high_score(found_words)
+        #         session['high_score'] = high_score
+        #         print('High score:', high_score)
 
-                return jsonify({'message': 'Valid word', 'high_score': high_score, 'found_words': found_words})
-            else:
-                return jsonify({'message': 'Word is not valid on board'})
-            
+        #         return jsonify({'message': 'Valid word', 'high_score': high_score, 
+        # 'found_words': found_words})
+        #     else:
+        #         return jsonify({'message': 'Word is not valid on board'})
+
     board = get_current_board()
     return render_template('home.html', board=board)
 
