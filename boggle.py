@@ -145,4 +145,4 @@ class Boggle():
         return f'{self.words}'
 
 boggle = Boggle()
-print(boggle)
+# print(boggle)
