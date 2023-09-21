@@ -4,33 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/static/boggle.css">
+
+    
     <title> Boggle </title>
+    <link rel="stylesheet" href="/static/boggle.css">
 </head>
 <body>
     <h1> B<span style="color:antiquewhite;">o</span>ggle </h1>
+    <section id="boggle">
+
+        <table id="board"> 
+            <tbody>
+            {% for row in board %}
+                <tr class="board-row">
+                    {% for cell in row %}
+                        <td class="cell"> {{ cell }}</td> 
+                    {% endfor %}
+                </tr>  
+            {% endfor %}
+            </tbody>
+        </table>
+        
+        <p> High Score: 
+            <b> {{ high_score }} </b>
+            in {{ num_plays}} plays
+        </p>
+
+        <p>
+            Score: <b class="score"> 0 </b>
+            Seconds Left: <b class="countdown-timer"></b>
+        </p>
+
+        <form method="POST" class="add-word">
+            <input class="word" name="word" autofocus>
+            <button> Try word </button>
+        </form>
+
+    <p class="message"></p>
     
-    <div id="countdown-timer"> 60 </div>
-    <div id="board"> 
-        {% for row in board %}
-            <div class="board-row">
-                {% for cell in row %}
-                    <span class="cell"> {{ cell }}</span> 
-                {% endfor %}
-            </div>   
-        {% endfor %}
-    </div>
-    <form id="guess-form" action="/" method="POST">
-        <label for="guess"> Enter your guess: </label>
-        <input type="text" id="guess" name="guess" required>
-        <button type="submit"> Try word </button>
-    </form>
+    <ul class="words"></ul>
 
-
+    </section>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/static/boggle.js"></script>
+    <script> let game = new BoggleGame("boggle", 60) </script>
     
 </body>
 </html>
