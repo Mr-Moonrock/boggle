@@ -1,0 +1,43 @@
+body {
+    background-color: lightsalmon;
+}
+
+table {
+    width: 200px;
+    height: 200px;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0 auto;
+    
+}
+
+#score {
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    font-size: 75px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+input {
+    margin: 5px;
+
+}
+
+#countdown-timer {
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+
+}
